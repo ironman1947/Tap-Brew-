@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-espresso: #2C1E18;
+  --color-espresso-light: #3D2B22;
+  --color-espresso-dark: #1E1410;
+  
+  --color-charcoal: #171310;
+  --color-charcoal-card: #201A16;
+  --color-charcoal-light: #28221D;
+
+  --color-cream: #FAF5ED;
+  --color-cream-muted: #E6DFD3;
+  --color-cream-dark: #C4BCAC;
+
+  --color-caramel: #C88D56;
+  --color-caramel-hover: #B87B42;
+  --color-caramel-light: #F4E8DC;
+
+  --color-brass: #D9AD68;
+  --color-brass-glow: rgba(217, 173, 104, 0.35);
+
+  --color-sage: #8F9E83;
+  --color-terracotta: #B9684A;
+}
+
+@layer base {
+  * {
+    border-color: rgba(217, 173, 104, 0.15);
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: var(--color-cream);
+    background-color: var(--color-charcoal);
+  }
+
+  body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-charcoal);
+    color: var(--color-cream);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #171310;
+}
+::-webkit-scrollbar-thumb {
+  background: #3D2B22;
+  border-radius: 4px;
+  border: 1px solid rgba(217, 173, 104, 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C88D56;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(32, 26, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(217, 173, 104, 0.18);
+}
+
+.glass-panel-subtle {
+  background: rgba(32, 26, 22, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(250, 245, 237, 0.08);
+}
+
+.brass-gradient-text {
+  background: linear-gradient(135deg, #FAF5ED 0%, #D9AD68 60%, #C88D56 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.caramel-gradient-bg {
+  background: linear-gradient(135deg, #C88D56 0%, #B9684A 100%);
+}
+
+.glow-brass {
+  box-shadow: 0 0 35px rgba(217, 173, 104, 0.22);
+}
+
+.glow-brass-lg {
+  box-shadow: 0 0 55px rgba(217, 173, 104, 0.35);
+}
+
+/* Pulse animation for NFC waves */
+@keyframes nfcPulse {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.92);
+    opacity: 0.9;
+  }
+}
+
+.animate-nfc-pulse {
+  animation: nfcPulse 3s ease-in-out infinite;
+}
+
+/* Custom noise texture overlay */
+.bg-grain {
+  background-image: radial-gradient(rgba(217, 173, 104, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
