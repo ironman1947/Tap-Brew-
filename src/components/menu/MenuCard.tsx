@@ -26,18 +26,30 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
   return (
     <div
       onClick={handleAction}
-      className="group relative rounded-3xl glass-panel border border-[#FAF5ED]/10 hover:border-[#D9AD68]/50 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col justify-between cursor-pointer"
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleAction();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`${item.name}, ${formatCurrency(item.price)}. ${item.supportsCustomization ? 'Tap to customize' : 'Tap to add'}`}
+      className="group relative rounded-3xl glass-panel border border-[#FAF5ED]/10 hover:border-[#D9AD68]/50 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl flex flex-col justify-between cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#D9AD68]/50"
     >
       {/* Top Media & Badges */}
-      <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-[#2C1E18]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#2C1E18]">
         <img
           src={item.image}
           alt={item.name}
+          width={600}
+          height={450}
           loading="lazy"
+          decoding="async"
           onError={(e) => {
             e.currentTarget.src = isBeverage ? FALLBACK_COFFEE_IMAGE : FALLBACK_FOOD_IMAGE;
           }}
-          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
 
         {/* Gradient Shadow Overlay */}
@@ -69,7 +81,7 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
             {item.isSpecial && (
               <span className="px-2 py-0.5 rounded-md bg-[#B9684A] text-white text-[10px] font-extrabold flex items-center gap-1 shadow-md">
                 <Flame className="w-2.5 h-2.5" />
-                CHEF'S SPECIAL
+                SPECIAL
               </span>
             )}
           </div>
@@ -85,13 +97,13 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
       </div>
 
       {/* Content Details */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
           <div className="flex items-start justify-between gap-2 mb-1.5">
-            <h3 className="font-heading font-bold text-lg text-[#FAF5ED] group-hover:text-[#D9AD68] transition-colors leading-snug">
+            <h3 className="font-heading font-bold text-base sm:text-lg text-[#FAF5ED] group-hover:text-[#D9AD68] transition-colors leading-snug">
               {item.name}
             </h3>
-            <span className="font-heading font-bold text-base text-[#D9AD68] whitespace-nowrap">
+            <span className="font-heading font-bold text-sm sm:text-base text-[#D9AD68] whitespace-nowrap">
               {formatCurrency(item.price)}
             </span>
           </div>
@@ -104,15 +116,19 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
         {/* Footer Actions */}
         <div className="pt-3 border-t border-[#FAF5ED]/10 flex items-center justify-between gap-2">
           <div className="text-[11px] text-[#C88D56] font-medium">
-            <span className="flex items-center gap-1">
-              <SlidersHorizontal className="w-3 h-3" />
-              Customizable
-            </span>
+            {item.supportsCustomization ? (
+              <span className="flex items-center gap-1">
+                <SlidersHorizontal className="w-3 h-3" />
+                Customizable
+              </span>
+            ) : (
+              <span className="text-[#C4BCAC]/70">Ready to serve</span>
+            )}
           </div>
 
           <button
             onClick={handleAction}
-            className="px-3.5 py-1.5 rounded-xl bg-[#2C1E18] hover:bg-[#D9AD68] text-[#FAF5ED] hover:text-[#171310] border border-[#D9AD68]/40 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer"
+            className="px-3.5 py-1.5 rounded-xl bg-[#2C1E18] hover:bg-[#D9AD68] text-[#FAF5ED] hover:text-[#171310] border border-[#D9AD68]/40 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer min-h-[36px]"
           >
             {item.supportsCustomization ? (
               <>

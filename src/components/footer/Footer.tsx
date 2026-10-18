@@ -2,6 +2,8 @@ import React from 'react';
 import { Coffee, MapPin, Phone, Mail, Clock, Heart } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const Footer: React.FC = () => {
   const { tableNumber, setIsTableModalOpen, setIsAssistanceModalOpen } = useCart();
 
@@ -138,7 +140,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Credits & Prototype Disclaimer */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#C4BCAC]/70">
-          <p>© {new Date().getFullYear()} TAP &amp; BREW Smart Café &amp; Roastery. All rights reserved.</p>
+          <p>© {CURRENT_YEAR} TAP &amp; BREW Smart Café &amp; Roastery. All rights reserved.</p>
           <p className="flex items-center gap-1">
             <span>Crafted with</span>
             <Heart className="w-3.5 h-3.5 text-[#B9684A] fill-[#B9684A]" />

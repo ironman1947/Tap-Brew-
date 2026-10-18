@@ -15,43 +15,57 @@ import { TableSelectorModal } from './components/table/TableSelectorModal';
 import { TableAssistanceModal } from './components/table/TableAssistanceModal';
 import { Toast } from './components/common/Toast';
 
+import { useCart } from './context/CartContext';
+
+const MainLayout: React.FC = () => {
+  const { itemCount } = useCart();
+
+  return (
+    <div
+      className={`min-h-screen min-h-[100dvh] bg-[#171310] text-[#FAF5ED] font-sans antialiased selection:bg-[#C88D56] selection:text-[#171310] relative overflow-x-hidden transition-all duration-300 ${
+        itemCount > 0 ? 'pb-28 md:pb-0' : ''
+      }`}
+    >
+      {/* Navigation Bar */}
+      <Navbar />
+
+      {/* Main Content Sections */}
+      <main>
+        {/* Hero Section with 3D Tabletop Experience */}
+        <HeroSection />
+
+        {/* Customer Experience: TAP -> EXPLORE -> ENJOY */}
+        <ExperienceSteps />
+
+        {/* Interactive Digital Menu */}
+        <MenuSection />
+
+        {/* About the Café */}
+        <AboutSection />
+
+        {/* Our Coffee & Roastery Science */}
+        <CoffeeShowcase />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Global Floating Modals & Drawers */}
+      <FloatingCartBar />
+      <CartDrawer />
+      <ItemCustomizerModal />
+      <CheckoutModal />
+      <TableSelectorModal />
+      <TableAssistanceModal />
+      <Toast />
+    </div>
+  );
+};
+
 export const App: React.FC = () => {
   return (
     <CartProvider>
-      <div className="min-h-screen bg-[#171310] text-[#FAF5ED] font-sans antialiased selection:bg-[#C88D56] selection:text-[#171310] relative overflow-x-hidden">
-        {/* Navigation Bar */}
-        <Navbar />
-
-        {/* Main Content Sections */}
-        <main>
-          {/* Hero Section with 3D Tabletop Experience */}
-          <HeroSection />
-
-          {/* Customer Experience: TAP -> EXPLORE -> ENJOY */}
-          <ExperienceSteps />
-
-          {/* Interactive Digital Menu */}
-          <MenuSection />
-
-          {/* About the Café */}
-          <AboutSection />
-
-          {/* Our Coffee & Roastery Science */}
-          <CoffeeShowcase />
-        </main>
-
-        {/* Footer */}
-        <Footer />
-
-        {/* Global Floating Modals & Drawers */}
-        <FloatingCartBar />
-        <CartDrawer />
-        <ItemCustomizerModal />
-        <CheckoutModal />
-        <TableSelectorModal />
-        <TableAssistanceModal />
-        <Toast />
-      </div>
+      <MainLayout />
     </CartProvider>
   );
 };

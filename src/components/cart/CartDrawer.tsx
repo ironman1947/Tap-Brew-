@@ -33,7 +33,7 @@ export const CartDrawer: React.FC = () => {
       className="fixed inset-0 z-50 overflow-hidden bg-black/75 backdrop-blur-md flex justify-end animate-fade-in"
     >
       <div
-        className="w-full max-w-md bg-[#1B1613] border-l border-[#D9AD68]/30 h-full flex flex-col justify-between shadow-2xl animate-slide-left"
+        className="w-full max-w-md bg-[#1B1613] border-l border-[#D9AD68]/30 h-[100dvh] max-h-[100dvh] flex flex-col justify-between shadow-2xl animate-slide-left"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -59,7 +59,8 @@ export const CartDrawer: React.FC = () => {
 
           <button
             onClick={() => setIsCartOpen(false)}
-            className="w-8 h-8 rounded-full bg-[#171310] text-[#C4BCAC] hover:text-[#FAF5ED] flex items-center justify-center border border-[#FAF5ED]/10 cursor-pointer"
+            className="w-9 h-9 rounded-full bg-[#171310] text-[#C4BCAC] hover:text-[#FAF5ED] flex items-center justify-center border border-[#FAF5ED]/10 cursor-pointer"
+            aria-label="Close cart"
           >
             <X className="w-4 h-4" />
           </button>
@@ -78,6 +79,10 @@ export const CartDrawer: React.FC = () => {
                   <img
                     src={cartItem.item.image}
                     alt={cartItem.item.name}
+                    width={64}
+                    height={64}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -181,7 +186,7 @@ export const CartDrawer: React.FC = () => {
 
         {/* Bill Breakdown & Checkout Footer */}
         {cart.length > 0 && (
-          <div className="p-5 bg-[#201A16] border-t border-[#D9AD68]/20 space-y-3.5">
+          <div className="p-4 sm:p-5 pb-safe bg-[#201A16] border-t border-[#D9AD68]/20 space-y-3 shrink-0">
             {/* Clear Cart link */}
             <div className="flex justify-end">
               <button

@@ -76,14 +76,17 @@ export const ItemCustomizerModal: React.FC = () => {
       onClick={() => setCustomizingItem(null)}
     >
       <div
-        className="w-full max-w-lg bg-[#1F1915] border border-[#D9AD68]/30 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[85vh] animate-slide-up"
+        className="w-full max-w-lg bg-[#1F1915] border border-[#D9AD68]/30 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] sm:max-h-[85dvh] animate-slide-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with image & close */}
-        <div className="relative h-44 sm:h-48 w-full bg-[#2C1E18] shrink-0">
+        <div className="relative h-36 sm:h-48 w-full bg-[#2C1E18] shrink-0">
           <img
             src={customizingItem.image}
             alt={customizingItem.name}
+            width={600}
+            height={400}
+            decoding="async"
             onError={(e) => {
               e.currentTarget.src = isBeverage ? FALLBACK_COFFEE_IMAGE : FALLBACK_FOOD_IMAGE;
             }}
@@ -93,7 +96,8 @@ export const ItemCustomizerModal: React.FC = () => {
           
           <button
             onClick={() => setCustomizingItem(null)}
-            className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#171310]/80 text-[#FAF5ED] hover:text-[#D9AD68] border border-[#FAF5ED]/20 flex items-center justify-center transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 w-10 h-10 rounded-full bg-[#171310]/80 text-[#FAF5ED] hover:text-[#D9AD68] border border-[#FAF5ED]/20 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Close customizer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -388,7 +392,7 @@ export const ItemCustomizerModal: React.FC = () => {
         </div>
 
         {/* Footer with Quantity & Add Button */}
-        <div className="p-4 sm:p-5 bg-[#171310] border-t border-[#D9AD68]/20 flex items-center justify-between gap-4 shrink-0">
+        <div className="p-4 sm:p-5 pb-safe bg-[#171310] border-t border-[#D9AD68]/20 flex items-center justify-between gap-4 shrink-0">
           {/* Quantity Controls */}
           <div className="flex items-center gap-2 bg-[#201A16] p-1 rounded-xl border border-[#FAF5ED]/10">
             <button

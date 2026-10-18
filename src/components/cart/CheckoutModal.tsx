@@ -51,10 +51,10 @@ export const CheckoutModal: React.FC = () => {
   return (
     <div
       onClick={handleClose}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in"
     >
       <div
-        className="w-full max-w-lg bg-[#1B1613] border border-[#D9AD68]/40 rounded-3xl shadow-2xl overflow-hidden animate-slide-up"
+        className="w-full max-w-lg bg-[#1B1613] border border-[#D9AD68]/40 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden animate-slide-up max-h-[92dvh] flex flex-col justify-between"
         onClick={(e) => e.stopPropagation()}
       >
         {/* If Order is Placed: Display Success Receipt */}
@@ -124,7 +124,7 @@ export const CheckoutModal: React.FC = () => {
 
             <button
               onClick={handleClose}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#D9AD68] to-[#C88D56] text-[#171310] font-heading font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-102 transition-all cursor-pointer"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#D9AD68] to-[#C88D56] text-[#171310] font-heading font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-102 transition-all cursor-pointer min-h-[46px]"
             >
               Done &amp; Return to Menu
             </button>
@@ -226,16 +226,16 @@ export const CheckoutModal: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="p-5 bg-[#201A16] border-t border-[#FAF5ED]/10 flex gap-3">
+            <div className="p-4 sm:p-5 pb-safe bg-[#201A16] border-t border-[#FAF5ED]/10 flex gap-3 shrink-0">
               <button
                 onClick={handleClose}
-                className="px-4 py-3 rounded-xl border border-[#FAF5ED]/15 text-[#C4BCAC] hover:text-[#FAF5ED] text-xs font-semibold cursor-pointer"
+                className="px-4 py-3 rounded-xl border border-[#FAF5ED]/15 text-[#C4BCAC] hover:text-[#FAF5ED] text-xs font-semibold cursor-pointer min-h-[44px]"
               >
                 Back to Cart
               </button>
               <button
                 onClick={handleSendOrder}
-                className="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-[#D9AD68] via-[#C88D56] to-[#B9684A] text-[#171310] font-heading font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:opacity-95 active:scale-95 transition-all cursor-pointer"
+                className="flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-[#D9AD68] via-[#C88D56] to-[#B9684A] text-[#171310] font-heading font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:opacity-95 active:scale-95 transition-all cursor-pointer min-h-[44px]"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Send Demo Order • {formatCurrency(grandTotal)}</span>

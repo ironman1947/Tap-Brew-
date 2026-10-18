@@ -66,7 +66,7 @@ export const ExperienceSteps: React.FC = () => {
             return (
               <div
                 key={item.step}
-                className="group relative p-7 sm:p-8 rounded-3xl glass-panel border border-[#FAF5ED]/10 hover:border-[#D9AD68]/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col justify-between"
+                className="group relative p-5 sm:p-8 rounded-3xl glass-panel border border-[#FAF5ED]/10 hover:border-[#D9AD68]/50 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col justify-between"
               >
                 {/* Background watermarked step number */}
                 <span className="absolute top-4 right-6 text-6xl font-black text-[#FAF5ED]/5 select-none group-hover:text-[#D9AD68]/10 transition-colors">
@@ -75,9 +75,9 @@ export const ExperienceSteps: React.FC = () => {
 
                 <div>
                   {/* Icon Header */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-13 h-13 rounded-2xl bg-[#2C1E18] border border-[#D9AD68]/30 flex items-center justify-center text-[#D9AD68] group-hover:scale-110 group-hover:bg-[#D9AD68] group-hover:text-[#171310] transition-all duration-300 shadow-md">
-                      <Icon className="w-6 h-6" />
+                  <div className="flex items-center justify-between mb-5 sm:mb-6">
+                    <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-2xl bg-[#2C1E18] border border-[#D9AD68]/30 flex items-center justify-center text-[#D9AD68] group-hover:scale-110 group-hover:bg-[#D9AD68] group-hover:text-[#171310] transition-all duration-300 shadow-md">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
                     <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full border ${item.badgeColor}`}>
                       STEP {item.step}
@@ -85,15 +85,15 @@ export const ExperienceSteps: React.FC = () => {
                   </div>
 
                   {/* Title & Subtitle */}
-                  <h3 className="text-2xl font-bold text-[#FAF5ED] mb-1 tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#FAF5ED] mb-1 tracking-tight">
                     {item.title}
                   </h3>
-                  <h4 className="text-xs font-semibold text-[#C88D56] uppercase tracking-wider mb-3">
+                  <h4 className="text-xs font-semibold text-[#C88D56] uppercase tracking-wider mb-2.5 sm:mb-3">
                     {item.subtitle}
                   </h4>
 
                   {/* Description */}
-                  <p className="text-sm text-[#C4BCAC] leading-relaxed mb-6">
+                  <p className="text-sm text-[#C4BCAC] leading-relaxed mb-5 sm:mb-6">
                     {item.description}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export const ExperienceSteps: React.FC = () => {
                 {/* Interactive Action Button */}
                 <button
                   onClick={item.action}
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#201A16] group-hover:bg-[#2C1E18] border border-[#FAF5ED]/10 group-hover:border-[#D9AD68]/40 text-xs font-semibold text-[#FAF5ED] flex items-center justify-between transition-colors cursor-pointer"
+                  className="w-full py-2.5 sm:py-3 px-4 rounded-xl bg-[#201A16] group-hover:bg-[#2C1E18] border border-[#FAF5ED]/10 group-hover:border-[#D9AD68]/40 text-xs font-semibold text-[#FAF5ED] flex items-center justify-between transition-colors cursor-pointer min-h-[44px]"
                 >
                   <span>{item.actionText}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#D9AD68] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

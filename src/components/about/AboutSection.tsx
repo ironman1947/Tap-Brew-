@@ -19,7 +19,10 @@ export const AboutSection: React.FC = () => {
                 <img
                   src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=800&q=80"
                   alt="Barista brewing specialty coffee at Tap & Brew"
+                  width={800}
+                  height={1000}
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     e.currentTarget.src = 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=800&q=80';
                   }}

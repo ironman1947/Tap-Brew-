@@ -158,21 +158,21 @@ export const MenuSection: React.FC = () => {
 
           </div>
 
-          {/* Horizontally Scrollable Category Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-2">
+          {/* Horizontally Scrollable Category Pills with edge-bleed on mobile */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none pt-2 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth">
             {CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-4 py-2.5 rounded-2xl text-xs font-heading font-semibold whitespace-nowrap flex items-center gap-2 transition-all cursor-pointer ${
+                  className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-heading font-semibold whitespace-nowrap flex items-center gap-2 transition-all cursor-pointer shrink-0 min-h-[38px] ${
                     isActive
                       ? 'bg-gradient-to-r from-[#D9AD68] to-[#C88D56] text-[#171310] font-bold shadow-lg scale-102 ring-2 ring-[#D9AD68]/30'
                       : 'bg-[#201A16] hover:bg-[#2C1E18] text-[#FAF5ED]/80 hover:text-[#FAF5ED] border border-[#FAF5ED]/10'
                   }`}
                 >
-                  <Coffee className="w-3.5 h-3.5" />
+                  <Coffee className="w-3.5 h-3.5 shrink-0" />
                   <span>{cat.label}</span>
                 </button>
               );
@@ -191,7 +191,7 @@ export const MenuSection: React.FC = () => {
           {(selectedCategory !== 'all' || searchQuery !== '' || dietaryFilter !== 'all') && (
             <button
               onClick={resetFilters}
-              className="text-[#D9AD68] hover:underline flex items-center gap-1 cursor-pointer font-medium"
+              className="text-[#D9AD68] hover:underline flex items-center gap-1 cursor-pointer font-medium p-1"
             >
               <RefreshCw className="w-3 h-3" />
               Reset all filters
@@ -205,7 +205,7 @@ export const MenuSection: React.FC = () => {
           {/* Menu Items Grid */}
           <div className={cart.length > 0 ? "lg:col-span-8" : "lg:col-span-8 xl:col-span-8"}>
             {filteredItems.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {filteredItems.map((item) => (
                   <MenuCard key={item.id} item={item} />
                 ))}

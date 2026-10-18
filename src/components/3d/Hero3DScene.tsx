@@ -83,14 +83,18 @@ function SteamPuff() {
     return pos;
   }, [count]);
 
-  useFrame((state, delta) => {
+  const elapsedRef = useRef(0);
+
+  useFrame((_state, delta) => {
     if (!pointsRef.current) return;
+    elapsedRef.current += delta;
+    const t = elapsedRef.current;
     const pos = pointsRef.current.geometry.attributes.position.array as Float32Array;
     for (let i = 0; i < count; i++) {
       // drift upward
       pos[i * 3 + 1] += delta * (0.35 + (i % 3) * 0.1);
       // subtle sine wave sway
-      pos[i * 3 + 0] += Math.sin(state.clock.elapsedTime * 2 + i) * 0.002;
+      pos[i * 3 + 0] += Math.sin(t * 2 + i) * 0.002;
       if (pos[i * 3 + 1] > 1.6) {
         pos[i * 3 + 1] = 0.1;
         pos[i * 3 + 0] = (Math.random() - 0.5) * 0.22;
@@ -250,10 +254,12 @@ function WirelessWaves({ active }: { active: boolean }) {
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
   const ring3Ref = useRef<THREE.Mesh>(null);
+  const elapsedRef = useRef(0);
 
-  useFrame((state) => {
+  useFrame((_state, delta) => {
     if (!ring1Ref.current || !ring2Ref.current || !ring3Ref.current) return;
-    const t = state.clock.elapsedTime * 2.5;
+    elapsedRef.current += delta;
+    const t = elapsedRef.current * 2.5;
 
     // Expanding pulse waves towards phone
     const s1 = 1 + (t % 1) * 0.8;
@@ -291,12 +297,15 @@ function WirelessWaves({ active }: { active: boolean }) {
 function NfcDisc({ active, onTriggerTap }: { active: boolean; onTriggerTap: () => void }) {
   const meshRef = useRef<THREE.Group>(null);
   const glowLightRef = useRef<THREE.PointLight>(null);
+  const elapsedRef = useRef(0);
 
-  useFrame((state) => {
+  useFrame((_state, delta) => {
     if (glowLightRef.current) {
+      elapsedRef.current += delta;
+      const t = elapsedRef.current;
       const pulse = active
-        ? 3.5 + Math.sin(state.clock.elapsedTime * 12) * 1.5
-        : 0.8 + Math.sin(state.clock.elapsedTime * 2) * 0.4;
+        ? 3.5 + Math.sin(t * 12) * 1.5
+        : 0.8 + Math.sin(t * 2) * 0.4;
       glowLightRef.current.intensity = pulse;
     }
   });
@@ -375,14 +384,17 @@ function NfcDisc({ active, onTriggerTap }: { active: boolean; onTriggerTap: () =
 /* --- SMARTPHONE DISPLAYING DIGITAL MENU --- */
 function SmartphoneScene({ active, tableNumber }: { active: boolean; tableNumber: string }) {
   const phoneGroup = useRef<THREE.Group>(null);
+  const elapsedRef = useRef(0);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (!phoneGroup.current) return;
+    elapsedRef.current += delta;
+    const t = elapsedRef.current;
     if (active) {
       // Gentle floating lift on tap
       phoneGroup.current.position.y = THREE.MathUtils.lerp(
         phoneGroup.current.position.y,
-        0.26 + Math.sin(state.clock.elapsedTime * 6) * 0.02,
+        0.26 + Math.sin(t * 6) * 0.02,
         delta * 6
       );
       phoneGroup.current.rotation.z = THREE.MathUtils.lerp(phoneGroup.current.rotation.z, -0.04, delta * 6);
@@ -618,17 +630,17 @@ export const Hero3DScene: React.FC = () => {
   const [hasWebGlError, setHasWebGlError] = useState(false);
 
   const fallbackCard = (
-    <div className="relative w-full h-[460px] sm:h-[520px] lg:h-[580px] rounded-3xl bg-gradient-to-br from-[#2C1E18] to-[#171310] border border-[#D9AD68]/30 overflow-hidden flex flex-col items-center justify-center p-6 text-center shadow-2xl">
-      <div className="w-20 h-20 rounded-full bg-[#D9AD68]/20 flex items-center justify-center text-[#D9AD68] mb-4 border border-[#D9AD68]/40 animate-pulse">
-        <Wifi className="w-10 h-10" />
+    <div className="relative w-full h-[340px] xs:h-[380px] sm:h-[460px] lg:h-[540px] rounded-3xl bg-gradient-to-br from-[#2C1E18] to-[#171310] border border-[#D9AD68]/30 overflow-hidden flex flex-col items-center justify-center p-6 text-center shadow-2xl">
+      <div className="w-16 h-16 rounded-full bg-[#D9AD68]/20 flex items-center justify-center text-[#D9AD68] mb-4 border border-[#D9AD68]/40 animate-pulse">
+        <Wifi className="w-8 h-8" />
       </div>
-      <h3 className="text-2xl font-bold text-[#FAF5ED] mb-2 font-heading">Smart NFC Table Ordering</h3>
-      <p className="text-sm text-[#C4BCAC] max-w-md mb-6">
+      <h3 className="text-xl sm:text-2xl font-bold text-[#FAF5ED] mb-2 font-heading">Smart NFC Table Ordering</h3>
+      <p className="text-xs sm:text-sm text-[#C4BCAC] max-w-md mb-6">
         Seated at <span className="text-[#D9AD68] font-bold">{tableNumber}</span>. Tap your phone against the table tag or simulate below.
       </p>
       <button
         onClick={triggerNfcTapSequence}
-        className="px-6 py-3 rounded-full bg-gradient-to-r from-[#D9AD68] to-[#C88D56] text-[#171310] font-bold flex items-center gap-2 hover:scale-105 transition-transform shadow-lg cursor-pointer"
+        className="px-6 py-3 rounded-full bg-gradient-to-r from-[#D9AD68] to-[#C88D56] text-[#171310] font-bold flex items-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
       >
         <Sparkles className="w-4 h-4" />
         Experience NFC Tap
@@ -642,10 +654,17 @@ export const Hero3DScene: React.FC = () => {
 
   return (
     <WebGlErrorBoundary fallback={fallbackCard}>
-      <div className="relative w-full h-[460px] sm:h-[520px] lg:h-[580px] rounded-3xl overflow-hidden glass-panel border border-[#D9AD68]/25 shadow-2xl group touch-pan-y">
-        {/* 3D Canvas */}
+      <div className="relative w-full h-[340px] xs:h-[380px] sm:h-[460px] lg:h-[540px] rounded-3xl overflow-hidden glass-panel border border-[#D9AD68]/25 shadow-2xl group touch-pan-y">
+        {/* 3D Canvas with performance settings */}
         <Canvas
-          shadows
+          shadows={{ type: THREE.PCFShadowMap }}
+          dpr={[1, 1.5]}
+          gl={{
+            powerPreference: 'high-performance',
+            antialias: true,
+            alpha: true,
+          }}
+          performance={{ min: 0.5 }}
           camera={{ position: [0, 2.8, 4.6], fov: 42 }}
           onError={() => setHasWebGlError(true)}
           className="cursor-grab active:cursor-grabbing touch-pan-y"

@@ -34,10 +34,10 @@ export const TableAssistanceModal: React.FC = () => {
   return (
     <div
       onClick={() => setIsAssistanceModalOpen(false)}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in"
     >
       <div
-        className="w-full max-w-lg bg-[#1B1613] border border-[#D9AD68]/40 rounded-3xl shadow-2xl overflow-hidden animate-slide-up"
+        className="w-full max-w-lg bg-[#1B1613] border border-[#D9AD68]/40 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden animate-slide-up max-h-[90dvh] flex flex-col justify-between"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -195,10 +195,10 @@ export const TableAssistanceModal: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-[#201A16] border-t border-[#FAF5ED]/10 flex justify-end">
+        <div className="p-4 pb-safe bg-[#201A16] border-t border-[#FAF5ED]/10 flex justify-end shrink-0">
           <button
             onClick={() => setIsAssistanceModalOpen(false)}
-            className="px-5 py-2.5 rounded-xl bg-[#2C1E18] hover:bg-[#3D2B22] text-[#FAF5ED] border border-[#FAF5ED]/10 text-xs font-semibold cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-[#2C1E18] hover:bg-[#3D2B22] text-[#FAF5ED] border border-[#FAF5ED]/10 text-xs font-semibold cursor-pointer min-h-[40px]"
           >
             Close
           </button>

@@ -107,6 +107,10 @@ export const CoffeeShowcase: React.FC = () => {
             <img
               src={activeMethod.image}
               alt={activeMethod.name}
+              width={700}
+              height={525}
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 e.currentTarget.src = 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?auto=format&fit=crop&w=700&q=80';
               }}
